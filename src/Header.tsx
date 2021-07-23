@@ -1,20 +1,28 @@
-import { Container } from "@material-ui/core";
+import { Container, Typography } from "@material-ui/core";
 import React from "react";
-import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/styles";
 
-const Header: React.FC = () => (
-  <nav>
-    <Container maxWidth="lg">
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/item/123">Test Item</Link>
-        </li>
-      </ul>
-    </Container>
-  </nav>
-);
+const useStyles = makeStyles({
+  header: {
+    margin: "2rem 0",
+  },
+  heading: {
+    fontFamily: "Secular One, Roboto, Helvetica, Arial, sans-serif",
+    textAlign: "center",
+  },
+});
+
+const Header: React.FC = () => {
+  const classes = useStyles();
+  return (
+    <header className={classes.header}>
+      <Container maxWidth="lg">
+        <Typography variant="h3" component="h1" className={classes.heading}>
+          Media Bucket List
+        </Typography>
+      </Container>
+    </header>
+  );
+};
 
 export default Header;
