@@ -1,0 +1,43 @@
+overwrite: true
+schema: "http://localhost:4000/graph"
+documents: "src/graphql/**/*.graphql"
+generates:
+  src/__generated__/types.ts:
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+    config:
+      withHooks: true
+      preResolveTypes: true
+
+  src/__generated__/possible-types.ts:
+    plugins:
+      - 'fragment-matcher'
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .types.tsx
+      baseTypesPath: '__generated__/types.ts'
+      importTypesNamespace: SchemaTypes
+      folder: '../__generated__/graphql'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript-operations
+      - typescript-react-apollo
+    hooks:
+      afterOneFileWrite:
+        - prettier --write
+    config:
+      withHooks: true
+      preResolveTypes: true
+      skipTypeNameForRoot: true
+
+  ./graphql.schema.json:
+    plugins:
+      - introspection
