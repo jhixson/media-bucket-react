@@ -1,24 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {
-  ApolloProvider,
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache,
-} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
 import { CssBaseline, createTheme, ThemeProvider } from "@material-ui/core";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graph",
-});
-
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-});
+import client from "./ApolloClient";
 
 const theme = createTheme({
   overrides: {
