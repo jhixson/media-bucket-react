@@ -8,12 +8,16 @@ import reportWebVitals from "./reportWebVitals";
 import client from "./ApolloClient";
 
 const theme = createTheme({
+  palette: {
+    text: {
+      primary: "#e1e2e2",
+    },
+  },
   overrides: {
     MuiCssBaseline: {
       "@global": {
         body: {
           backgroundColor: "#1e1f1f",
-          color: "#e1e2e2",
         },
       },
     },
