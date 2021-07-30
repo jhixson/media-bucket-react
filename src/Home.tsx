@@ -7,11 +7,15 @@ const Home: React.FC = () => {
   const { data, loading } = useGetItemsQuery();
   const itemList = loading
     ? []
-    : data?.items?.map((item) => (
-        <Grid key={item?.title} item>
-          <MediaItem title={item?.title} status={item?.status} />
-        </Grid>
-      ));
+    : data?.items?.map(
+        (item) =>
+          item && (
+            <Grid key={item.id} item>
+              <MediaItem id={item.id} title={item.title} status={item.status} />
+            </Grid>
+          )
+      );
+
   return (
     <Grid container justifyContent="center" spacing={4} xs={12}>
       {itemList}

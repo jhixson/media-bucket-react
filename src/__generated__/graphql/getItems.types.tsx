@@ -13,6 +13,7 @@ export type GetItemsQuery = {
     Array<
       SchemaTypes.Maybe<{
         __typename?: "Item";
+        id: number;
         title?: SchemaTypes.Maybe<string>;
         status?: SchemaTypes.Maybe<SchemaTypes.Status>;
       }>
@@ -23,6 +24,7 @@ export type GetItemsQuery = {
 export const GetItemsDocument = gql`
   query GetItems {
     items {
+      id
       title
       status
     }

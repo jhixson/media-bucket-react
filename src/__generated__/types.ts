@@ -15,7 +15,7 @@ export type Scalars = {
 /** An item */
 export type Item = {
   __typename?: 'Item';
-  id?: Maybe<Scalars['Int']>;
+  id: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
   status?: Maybe<Status>;

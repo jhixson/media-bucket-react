@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Item, Status } from "../__generated__/types";
+import { useUpdateItemMutation } from "../__generated__/graphql/updateItem.types";
 
 const useStyles = makeStyles({
   root: {
@@ -33,11 +34,27 @@ const GrayCheckbox = withStyles({
   checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-const MediaItem: React.FC<Item> = ({ title, status }) => {
+const MediaItem: React.FC<Item> = ({ id, title, status }) => {
   const classes = useStyles();
-  const [isChecked, setIsChecked] = useState(status === Status.Finished);
 
-  const toggleCheck = () => setIsChecked(!isChecked);
+  const [updateItem] = useUpdateItemMutation();
+
+  const toggleCheck = async () => {
+    let newStatus = Status.Pending;
+    if (status === Status.Pending) {
+      newStatus = Status.Started;
+    } else if (status === Status.Started) {
+      newStatus = Status.Finished;
+    }
+
+    const { errors } = await updateItem({
+      variables: { item: { id, status: newStatus } },
+      refetchQueries: ["GetItems"],
+    });
+
+    // eslint-disable-next-line no-console
+    if (errors) console.log(errors);
+  };
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -46,9 +63,10 @@ const MediaItem: React.FC<Item> = ({ title, status }) => {
           <FormControlLabel
             control={
               <GrayCheckbox
-                checked={isChecked}
+                checked={status === Status.Finished}
+                indeterminate={status === Status.Started}
                 onChange={toggleCheck}
-                name="checkedB"
+                name={`status_${id}`}
                 color="primary"
               />
             }
