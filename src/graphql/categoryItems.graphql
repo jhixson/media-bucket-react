@@ -1,0 +1,11 @@
+query categoryItems($categoryId: Int!) {
+  categoryItems(categoryId: $categoryId) {
+    title
+    items {
+      id
+      categoryId
+      title
+      status
+    }
+  }
+}

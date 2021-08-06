@@ -11,7 +11,7 @@ export type UpdateItemMutationVariables = SchemaTypes.Exact<{
 export type UpdateItemMutation = {
   updateItem?: SchemaTypes.Maybe<{
     __typename?: "Item";
-    title?: SchemaTypes.Maybe<string>;
+    title: string;
     status?: SchemaTypes.Maybe<SchemaTypes.Status>;
   }>;
 };

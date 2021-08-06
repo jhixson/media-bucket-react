@@ -12,17 +12,27 @@ export type Scalars = {
   Float: number;
 };
 
+/** A category */
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['Int'];
+  items: Array<Item>;
+  title: Scalars['String'];
+};
+
 /** An item */
 export type Item = {
   __typename?: 'Item';
+  categoryId: Scalars['Int'];
   id: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
   status?: Maybe<Status>;
-  title?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type ItemInput = {
+  categoryId: Scalars['Int'];
   id: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
@@ -41,7 +51,13 @@ export type RootMutationTypeUpdateItemArgs = {
 
 export type RootQueryType = {
   __typename?: 'RootQueryType';
-  items?: Maybe<Array<Maybe<Item>>>;
+  categories: Array<Category>;
+  categoryItems?: Maybe<Array<Maybe<Category>>>;
+};
+
+
+export type RootQueryTypeCategoryItemsArgs = {
+  categoryId: Scalars['Int'];
 };
 
 /** Media item statuses */
