@@ -1,25 +1,28 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import MediaItem from "./components/MediaItem";
-import { useGetItemsQuery } from "./__generated__/graphql/getItems.types";
+import { Box, Grid, useMediaQuery, useTheme } from "@material-ui/core";
+import { useGetCategoriesQuery } from "./__generated__/graphql/getCategories.types";
+import ItemList from "./components/ItemList";
 
 const Home: React.FC = () => {
-  const { data, loading } = useGetItemsQuery();
-  const itemList = loading
+  const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
+  const { data, loading } = useGetCategoriesQuery();
+  const categoryList = loading
     ? []
-    : data?.items?.map(
-        (item) =>
-          item && (
-            <Grid key={item.id} item>
-              <MediaItem id={item.id} title={item.title} status={item.status} />
-            </Grid>
-          )
-      );
+    : data?.categories.map((category) => {
+        return (
+          <Grid key={category.id} item xs={12} md="auto">
+            <ItemList title={category.title} items={category.items} />
+          </Grid>
+        );
+      });
 
   return (
-    <Grid container justifyContent="center" spacing={4} xs={12}>
-      {itemList}
-    </Grid>
+    <Box mx={2}>
+      <Grid container justifyContent="center" spacing={isSmall ? 0 : 4}>
+        {categoryList}
+      </Grid>
+    </Box>
   );
 };
 

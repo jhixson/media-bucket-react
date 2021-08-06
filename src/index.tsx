@@ -21,6 +21,11 @@ const theme = createTheme({
         },
       },
     },
+    MuiGrid: {
+      container: {
+        maxWidth: "100%",
+      },
+    },
   },
 });
 

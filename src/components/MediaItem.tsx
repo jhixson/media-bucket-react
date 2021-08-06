@@ -15,6 +15,7 @@ import { useUpdateItemMutation } from "../__generated__/graphql/updateItem.types
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    marginBottom: 16,
     backgroundColor: "#272828",
     borderColor: "#3e3e3f",
   },
@@ -34,7 +35,16 @@ const GrayCheckbox = withStyles({
   checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
 
-const MediaItem: React.FC<Item> = ({ id, title, status }) => {
+const SlimCardContent = withStyles({
+  root: {
+    padding: "8px 16px",
+    "&:last-child": {
+      paddingBottom: "12px",
+    },
+  },
+})(CardContent);
+
+const MediaItem: React.FC<Item> = ({ id, categoryId, title, status }) => {
   const classes = useStyles();
 
   const [updateItem] = useUpdateItemMutation();
@@ -48,8 +58,8 @@ const MediaItem: React.FC<Item> = ({ id, title, status }) => {
     }
 
     const { errors } = await updateItem({
-      variables: { item: { id, status: newStatus } },
-      refetchQueries: ["GetItems"],
+      variables: { item: { id, categoryId, status: newStatus } },
+      refetchQueries: ["getCategories"],
     });
 
     // eslint-disable-next-line no-console
@@ -58,7 +68,7 @@ const MediaItem: React.FC<Item> = ({ id, title, status }) => {
 
   return (
     <Card className={classes.root} variant="outlined">
-      <CardContent>
+      <SlimCardContent>
         <FormGroup row>
           <FormControlLabel
             control={
@@ -71,17 +81,13 @@ const MediaItem: React.FC<Item> = ({ id, title, status }) => {
               />
             }
             label={
-              <Typography
-                className={classes.title}
-                component="h2"
-                color="textPrimary"
-              >
+              <Typography component="h3" color="textPrimary">
                 {title}
               </Typography>
             }
           />
         </FormGroup>
-      </CardContent>
+      </SlimCardContent>
     </Card>
   );
 };
