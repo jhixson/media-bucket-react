@@ -13,6 +13,9 @@ const Component = () => (
 test("renders list of items", async () => {
   render(<Component />);
 
+  const category = await screen.findAllByText(/Movies/);
+  expect(category).toHaveLength(1);
+
   const items = await screen.findAllByText(/Future/);
   expect(items).toHaveLength(2);
 });

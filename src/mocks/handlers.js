@@ -1,17 +1,27 @@
 import { graphql } from "msw";
 
 const handlers = [
-  graphql.query("GetItems", (_req, res, ctx) => {
+  graphql.query("getCategories", (_req, res, ctx) => {
     return res(
       ctx.data({
-        items: [
+        categories: [
           {
-            title: "Back to the Future Part 2",
-            status: "FINISHED",
-          },
-          {
-            title: "Back to the Future Part 3",
-            status: "PENDING",
+            id: 1,
+            title: "Movies",
+            items: [
+              {
+                id: 1,
+                categoryId: 1,
+                title: "Back to the Future Part 2",
+                status: "FINISHED",
+              },
+              {
+                id: 2,
+                categoryId: 1,
+                title: "Back to the Future Part 3",
+                status: "PENDING",
+              },
+            ],
           },
         ],
       })
