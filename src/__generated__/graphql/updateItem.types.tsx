@@ -11,6 +11,8 @@ export type UpdateItemMutationVariables = SchemaTypes.Exact<{
 export type UpdateItemMutation = {
   updateItem?: SchemaTypes.Maybe<{
     __typename?: "Item";
+    id: number;
+    categoryId: number;
     title: string;
     status?: SchemaTypes.Maybe<SchemaTypes.Status>;
   }>;
@@ -19,6 +21,8 @@ export type UpdateItemMutation = {
 export const UpdateItemDocument = gql`
   mutation updateItem($item: ItemInput!) {
     updateItem(item: $item) {
+      id
+      categoryId
       title
       status
     }

@@ -59,7 +59,15 @@ const MediaItem: React.FC<Item> = ({ id, categoryId, title, status }) => {
 
     const { errors } = await updateItem({
       variables: { item: { id, categoryId, status: newStatus } },
-      refetchQueries: ["getCategories"],
+      optimisticResponse: {
+        updateItem: {
+          __typename: "Item",
+          categoryId,
+          id,
+          status: newStatus,
+          title,
+        },
+      },
     });
 
     // eslint-disable-next-line no-console

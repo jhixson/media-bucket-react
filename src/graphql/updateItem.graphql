@@ -1,5 +1,7 @@
 mutation updateItem($item: ItemInput!) {
   updateItem(item: $item) {
+    id
+    categoryId
     title
     status
   }
