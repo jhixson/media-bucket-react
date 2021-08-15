@@ -1,5 +1,5 @@
-mutation updateItem($item: ItemInput!) {
-  updateItem(item: $item) {
+mutation updateItem($id: Int!, $item: ItemInput!) {
+  updateItem(id: $id, item: $item) {
     id
     categoryId
     title

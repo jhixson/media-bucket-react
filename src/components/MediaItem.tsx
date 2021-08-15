@@ -58,7 +58,7 @@ const MediaItem: React.FC<Item> = ({ id, categoryId, title, status }) => {
     }
 
     const { errors } = await updateItem({
-      variables: { item: { id, categoryId, status: newStatus } },
+      variables: { id, item: { categoryId, status: newStatus } },
       optimisticResponse: {
         updateItem: {
           __typename: "Item",

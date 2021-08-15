@@ -45,8 +45,8 @@ const handlers = [
   graphql.mutation<UpdateItemMutation, UpdateItemMutationVariables>(
     "updateItem",
     (req, res, ctx) => {
-      const { item } = req.variables;
-      const { id, categoryId, status } = item;
+      const { id, item } = req.variables;
+      const { categoryId, status } = item;
       return res(
         ctx.data({
           updateItem: {

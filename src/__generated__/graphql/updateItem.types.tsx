@@ -5,6 +5,7 @@ import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 const defaultOptions = {};
 export type UpdateItemMutationVariables = SchemaTypes.Exact<{
+  id: SchemaTypes.Scalars["Int"];
   item: SchemaTypes.ItemInput;
 }>;
 
@@ -19,8 +20,8 @@ export type UpdateItemMutation = {
 };
 
 export const UpdateItemDocument = gql`
-  mutation updateItem($item: ItemInput!) {
-    updateItem(item: $item) {
+  mutation updateItem($id: Int!, $item: ItemInput!) {
+    updateItem(id: $id, item: $item) {
       id
       categoryId
       title
@@ -46,6 +47,7 @@ export type UpdateItemMutationFn = Apollo.MutationFunction<
  * @example
  * const [updateItemMutation, { data, loading, error }] = useUpdateItemMutation({
  *   variables: {
+ *      id: // value for 'id'
  *      item: // value for 'item'
  *   },
  * });

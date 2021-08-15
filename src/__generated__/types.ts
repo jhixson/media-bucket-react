@@ -33,7 +33,6 @@ export type Item = {
 
 export type ItemInput = {
   categoryId: Scalars['Int'];
-  id: Scalars['Int'];
   notes?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
   status?: Maybe<Status>;
@@ -41,11 +40,18 @@ export type ItemInput = {
 
 export type RootMutationType = {
   __typename?: 'RootMutationType';
+  addItem?: Maybe<Item>;
   updateItem?: Maybe<Item>;
 };
 
 
+export type RootMutationTypeAddItemArgs = {
+  item: ItemInput;
+};
+
+
 export type RootMutationTypeUpdateItemArgs = {
+  id: Scalars['Int'];
   item: ItemInput;
 };
 
