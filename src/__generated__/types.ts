@@ -36,6 +36,7 @@ export type ItemInput = {
   notes?: Maybe<Scalars['String']>;
   rating?: Maybe<Scalars['Int']>;
   status?: Maybe<Status>;
+  title: Scalars['String'];
 };
 
 export type RootMutationType = {

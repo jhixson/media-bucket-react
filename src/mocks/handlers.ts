@@ -1,5 +1,9 @@
 import { graphql } from "msw";
 import {
+  AddItemMutation,
+  AddItemMutationVariables,
+} from "../__generated__/graphql/addItem.types";
+import {
   UpdateItemMutation,
   UpdateItemMutationVariables,
 } from "../__generated__/graphql/updateItem.types";
@@ -54,6 +58,25 @@ const handlers = [
             id,
             categoryId,
             title: "Cool Runnings",
+            status,
+          },
+        })
+      );
+    }
+  ),
+
+  graphql.mutation<AddItemMutation, AddItemMutationVariables>(
+    "addItem",
+    (req, res, ctx) => {
+      const { item } = req.variables;
+      const { categoryId, title, status } = item;
+      return res(
+        ctx.data({
+          addItem: {
+            __typename: "Item",
+            id: 4,
+            categoryId,
+            title,
             status,
           },
         })

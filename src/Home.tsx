@@ -12,7 +12,11 @@ const Home: React.FC = () => {
     : data?.categories.map((category) => {
         return (
           <Grid key={category.id} item xs={12} md="auto">
-            <ItemList title={category.title} items={category.items} />
+            <ItemList
+              id={category.id}
+              title={category.title}
+              items={category.items}
+            />
           </Grid>
         );
       });

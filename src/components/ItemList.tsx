@@ -1,41 +1,78 @@
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import { Box, Button, Grid, makeStyles, Typography } from "@material-ui/core";
+import { AddCircle } from "@material-ui/icons";
+import React, { useState } from "react";
 import { Item } from "../__generated__/types";
+import AddItemDialog from "./AddItemDialog";
 import MediaItem from "./MediaItem";
 
 type Props = {
+  id: number;
   title: string;
   items: Item[];
 };
 
 const useStyles = makeStyles({
+  categoryHeader: {
+    marginBottom: 16,
+  },
+  titleWrapper: {
+    flex: 1,
+  },
   title: {
-    marginBottom: 8,
     fontSize: 18,
     fontWeight: "bold",
   },
 });
 
-const ItemList: React.FC<Props> = ({ title, items }) => {
+const ItemList: React.FC<Props> = ({ id, title, items }) => {
   const classes = useStyles();
+  const [isAddItemOpen, setIsAddItemOpen] = useState(false);
+
   const itemList = items.map((item) => <MediaItem key={item.id} {...item} />);
   return (
     <Box minWidth={275} mb={4}>
-      <Grid container alignItems="baseline" spacing={2}>
-        <Grid item>
-          <Typography
-            component="h2"
-            color="textPrimary"
-            className={classes.title}
-          >
-            {title}
-          </Typography>
+      <Grid
+        container
+        justifyContent="space-between"
+        alignItems="center"
+        className={classes.categoryHeader}
+      >
+        <Grid item className={classes.titleWrapper}>
+          <Grid container alignItems="baseline" spacing={2}>
+            <Grid item>
+              <Typography
+                component="h2"
+                color="textPrimary"
+                className={classes.title}
+              >
+                {title}
+              </Typography>
+            </Grid>
+            <Grid item>
+              <span>{items.length}</span>
+            </Grid>
+          </Grid>
         </Grid>
+
         <Grid item>
-          <span>{items.length}</span>
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            endIcon={<AddCircle />}
+            onClick={() => setIsAddItemOpen(true)}
+          >
+            Add Item
+          </Button>
         </Grid>
       </Grid>
       {itemList}
+      <AddItemDialog
+        categoryId={id}
+        categoryName={title}
+        open={isAddItemOpen}
+        handleClose={() => setIsAddItemOpen(false)}
+      />
     </Box>
   );
 };

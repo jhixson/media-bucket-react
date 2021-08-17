@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ApolloProvider } from "@apollo/client";
 import { CssBaseline, createTheme, ThemeProvider } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -9,6 +10,7 @@ import client from "./ApolloClient";
 
 const theme = createTheme({
   palette: {
+    primary: grey,
     text: {
       primary: "#e1e2e2",
     },

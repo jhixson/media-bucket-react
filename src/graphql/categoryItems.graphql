@@ -1,5 +1,6 @@
 query categoryItems($categoryId: Int!) {
   categoryItems(categoryId: $categoryId) {
+    id
     title
     items {
       id

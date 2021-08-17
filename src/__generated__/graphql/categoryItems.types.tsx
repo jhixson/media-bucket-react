@@ -13,6 +13,7 @@ export type CategoryItemsQuery = {
     Array<
       SchemaTypes.Maybe<{
         __typename?: "Category";
+        id: number;
         title: string;
         items: Array<{
           __typename?: "Item";
@@ -29,6 +30,7 @@ export type CategoryItemsQuery = {
 export const CategoryItemsDocument = gql`
   query categoryItems($categoryId: Int!) {
     categoryItems(categoryId: $categoryId) {
+      id
       title
       items {
         id
