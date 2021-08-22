@@ -1,0 +1,6 @@
+mutation deleteItem($id: Int!) {
+  deleteItem(id: $id) {
+    id
+    categoryId
+  }
+}

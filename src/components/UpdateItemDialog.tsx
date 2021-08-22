@@ -29,6 +29,7 @@ const useStyles = makeStyles(() => ({
 type Props = Item & {
   open: boolean;
   handleClose: () => void;
+  setIsDeleteItemOpen: (open: boolean) => void;
 };
 
 type FormValues = Omit<Item, "id" | "categoryId">;
@@ -42,6 +43,7 @@ const UpdateItemDialog: React.FC<Props> = ({
   status,
   open = false,
   handleClose,
+  setIsDeleteItemOpen,
 }) => {
   const classes = useStyles();
   const initialValues: FormValues = {
@@ -67,6 +69,11 @@ const UpdateItemDialog: React.FC<Props> = ({
     if (errors) console.log(errors);
 
     handleClose();
+  };
+
+  const confirmDelete = () => {
+    handleClose();
+    setIsDeleteItemOpen(true);
   };
 
   return (
@@ -164,7 +171,7 @@ const UpdateItemDialog: React.FC<Props> = ({
             <DialogActions className={classes.root}>
               <Grid container justifyContent="space-between">
                 <Grid item>
-                  <Button onClick={handleClose} color="secondary">
+                  <Button onClick={confirmDelete} color="secondary">
                     Delete
                   </Button>
                 </Grid>

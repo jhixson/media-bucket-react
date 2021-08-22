@@ -42,12 +42,18 @@ export type ItemInput = {
 export type RootMutationType = {
   __typename?: 'RootMutationType';
   addItem?: Maybe<Item>;
+  deleteItem?: Maybe<Item>;
   updateItem?: Maybe<Item>;
 };
 
 
 export type RootMutationTypeAddItemArgs = {
   item: ItemInput;
+};
+
+
+export type RootMutationTypeDeleteItemArgs = {
+  id: Scalars['Int'];
 };
 
 

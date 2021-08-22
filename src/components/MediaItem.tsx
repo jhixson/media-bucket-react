@@ -15,6 +15,7 @@ import { MoreHoriz } from "@material-ui/icons";
 import { Item, Status } from "../__generated__/types";
 import { useUpdateItemMutation } from "../__generated__/graphql/updateItem.types";
 import UpdateItemDialog from "./UpdateItemDialog";
+import DeleteItemDialog from "./DeleteItemDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -52,6 +53,7 @@ const MediaItem: React.FC<Item> = (props) => {
   const { id, categoryId, title, status } = props;
   const classes = useStyles();
   const [isUpdateItemOpen, setIsUpdateItemOpen] = useState(false);
+  const [isDeleteItemOpen, setIsDeleteItemOpen] = useState(false);
 
   const [updateItem] = useUpdateItemMutation();
 
@@ -124,6 +126,13 @@ const MediaItem: React.FC<Item> = (props) => {
         {...props}
         open={isUpdateItemOpen}
         handleClose={() => setIsUpdateItemOpen(false)}
+        setIsDeleteItemOpen={setIsDeleteItemOpen}
+      />
+      <DeleteItemDialog
+        id={id}
+        title={title}
+        open={isDeleteItemOpen}
+        handleClose={() => setIsDeleteItemOpen(false)}
       />
     </Card>
   );
