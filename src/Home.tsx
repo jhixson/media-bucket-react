@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     ? []
     : data?.categories.map((category) => {
         return (
-          <Grid key={category.id} item xs={12} md="auto">
+          <Grid key={category.id} item xs={12} md={3}>
             <ItemList
               id={category.id}
               title={category.title}

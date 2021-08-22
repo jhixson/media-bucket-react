@@ -19,6 +19,8 @@ export type GetCategoriesQuery = {
       categoryId: number;
       title: string;
       status?: SchemaTypes.Maybe<SchemaTypes.Status>;
+      rating?: SchemaTypes.Maybe<number>;
+      notes?: SchemaTypes.Maybe<string>;
     }>;
   }>;
 };
@@ -33,6 +35,8 @@ export const GetCategoriesDocument = gql`
         categoryId
         title
         status
+        rating
+        notes
       }
     }
   }

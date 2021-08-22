@@ -4,5 +4,7 @@ mutation updateItem($id: Int!, $item: ItemInput!) {
     categoryId
     title
     status
+    notes
+    rating
   }
 }

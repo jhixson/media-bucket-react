@@ -16,6 +16,8 @@ export type UpdateItemMutation = {
     categoryId: number;
     title: string;
     status?: SchemaTypes.Maybe<SchemaTypes.Status>;
+    notes?: SchemaTypes.Maybe<string>;
+    rating?: SchemaTypes.Maybe<number>;
   }>;
 };
 
@@ -26,6 +28,8 @@ export const UpdateItemDocument = gql`
       categoryId
       title
       status
+      notes
+      rating
     }
   }
 `;

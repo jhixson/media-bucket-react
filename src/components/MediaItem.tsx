@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,10 +7,14 @@ import {
   CheckboxProps,
   FormControlLabel,
   FormGroup,
+  Grid,
+  IconButton,
   Typography,
 } from "@material-ui/core";
+import { MoreHoriz } from "@material-ui/icons";
 import { Item, Status } from "../__generated__/types";
 import { useUpdateItemMutation } from "../__generated__/graphql/updateItem.types";
+import UpdateItemDialog from "./UpdateItemDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -44,8 +48,10 @@ const SlimCardContent = withStyles({
   },
 })(CardContent);
 
-const MediaItem: React.FC<Item> = ({ id, categoryId, title, status }) => {
+const MediaItem: React.FC<Item> = (props) => {
+  const { id, categoryId, title, status } = props;
   const classes = useStyles();
+  const [isUpdateItemOpen, setIsUpdateItemOpen] = useState(false);
 
   const [updateItem] = useUpdateItemMutation();
 
@@ -77,25 +83,48 @@ const MediaItem: React.FC<Item> = ({ id, categoryId, title, status }) => {
   return (
     <Card className={classes.root} variant="outlined">
       <SlimCardContent>
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <GrayCheckbox
-                checked={status === Status.Finished}
-                indeterminate={status === Status.Started}
-                onChange={toggleCheck}
-                name={`status_${id}`}
-                color="primary"
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="space-between"
+          wrap="nowrap"
+        >
+          <Grid item>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <GrayCheckbox
+                    checked={status === Status.Finished}
+                    indeterminate={status === Status.Started}
+                    onChange={toggleCheck}
+                    name={`status_${id}`}
+                    color="primary"
+                  />
+                }
+                label={
+                  <Typography component="h3" color="textPrimary">
+                    {title}
+                  </Typography>
+                }
               />
-            }
-            label={
-              <Typography component="h3" color="textPrimary">
-                {title}
-              </Typography>
-            }
-          />
-        </FormGroup>
+            </FormGroup>
+          </Grid>
+          <Grid item>
+            <IconButton
+              color="primary"
+              size="small"
+              onClick={() => setIsUpdateItemOpen(true)}
+            >
+              <MoreHoriz />
+            </IconButton>
+          </Grid>
+        </Grid>
       </SlimCardContent>
+      <UpdateItemDialog
+        {...props}
+        open={isUpdateItemOpen}
+        handleClose={() => setIsUpdateItemOpen(false)}
+      />
     </Card>
   );
 };

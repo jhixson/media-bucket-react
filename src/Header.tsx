@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles({
   header: {
-    margin: "2rem 0",
+    margin: "3rem 0",
   },
   heading: {
     fontFamily: "Secular One, Roboto, Helvetica, Arial, sans-serif",
