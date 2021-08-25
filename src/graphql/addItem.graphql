@@ -4,5 +4,7 @@ mutation addItem($item: ItemInput!) {
     categoryId
     title
     status
+    rating
+    notes
   }
 }

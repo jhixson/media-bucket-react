@@ -113,6 +113,7 @@ const MediaItem: React.FC<Item> = (props) => {
           </Grid>
           <Grid item>
             <IconButton
+              aria-label="Update Item"
               color="primary"
               size="small"
               onClick={() => setIsUpdateItemOpen(true)}

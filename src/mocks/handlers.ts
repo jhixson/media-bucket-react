@@ -24,6 +24,8 @@ const handlers = [
                 categoryId: 1,
                 title: "Back to the Future Part 2",
                 status: "FINISHED",
+                rating: null,
+                notes: "",
               },
               {
                 __typename: "Item",
@@ -31,6 +33,8 @@ const handlers = [
                 categoryId: 1,
                 title: "Back to the Future Part 3",
                 status: "PENDING",
+                rating: null,
+                notes: "",
               },
               {
                 __typename: "Item",
@@ -38,6 +42,8 @@ const handlers = [
                 categoryId: 1,
                 title: "Cool Runnings",
                 status: "FINISHED",
+                rating: null,
+                notes: "",
               },
             ],
           },
@@ -50,15 +56,17 @@ const handlers = [
     "updateItem",
     (req, res, ctx) => {
       const { id, item } = req.variables;
-      const { categoryId, status } = item;
+      const { categoryId, title, status, rating, notes } = item;
       return res(
         ctx.data({
           updateItem: {
             __typename: "Item",
             id,
             categoryId,
-            title: "Cool Runnings",
+            title,
             status,
+            rating,
+            notes,
           },
         })
       );
@@ -78,6 +86,8 @@ const handlers = [
             categoryId,
             title,
             status,
+            rating: 0,
+            notes: "",
           },
         })
       );

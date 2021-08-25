@@ -47,6 +47,8 @@ const AddItemDialog: React.FC<Props> = ({
                 fragment NewItem on Item {
                   id
                   status
+                  rating
+                  notes
                 }
               `,
             });

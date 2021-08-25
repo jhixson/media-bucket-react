@@ -15,6 +15,8 @@ export type AddItemMutation = {
     categoryId: number;
     title: string;
     status?: SchemaTypes.Maybe<SchemaTypes.Status>;
+    rating?: SchemaTypes.Maybe<number>;
+    notes?: SchemaTypes.Maybe<string>;
   }>;
 };
 
@@ -25,6 +27,8 @@ export const AddItemDocument = gql`
       categoryId
       title
       status
+      rating
+      notes
     }
   }
 `;
