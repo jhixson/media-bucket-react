@@ -24,11 +24,18 @@ const useStyles = makeStyles({
   },
 });
 
+const sortByTitle = (a: Item, b: Item) =>
+  a.title.localeCompare(b.title, "en", { sensitivity: "base" });
+
 const ItemList: React.FC<Props> = ({ id, title, items }) => {
   const classes = useStyles();
   const [isAddItemOpen, setIsAddItemOpen] = useState(false);
 
-  const itemList = items.map((item) => <MediaItem key={item.id} {...item} />);
+  const sortedItems = Array.from(items).sort(sortByTitle);
+
+  const itemList = sortedItems.map((item) => (
+    <MediaItem key={item.id} {...item} />
+  ));
   return (
     <Box minWidth={275} mb={4}>
       <Grid

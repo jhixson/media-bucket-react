@@ -78,6 +78,7 @@ const AddItemDialog: React.FC<Props> = ({
     // eslint-disable-next-line no-console
     if (errors) console.log(errors);
 
+    setItemTitle("");
     handleClose();
   };
 
