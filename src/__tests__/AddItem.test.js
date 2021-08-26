@@ -30,4 +30,5 @@ test("add item to category", async () => {
   userEvent.click(screen.getByRole("button", { name: "Submit" }));
   const newItem = await screen.findByText("Mac and Me");
   expect(newItem).toBeVisible();
+  expect(dialogInput).toHaveValue("");
 });
