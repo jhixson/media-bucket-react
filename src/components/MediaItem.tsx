@@ -11,7 +11,7 @@ import {
   IconButton,
   Typography,
 } from "@material-ui/core";
-import { MoreHoriz } from "@material-ui/icons";
+import MoreHoriz from "@material-ui/icons/MoreHoriz";
 import { Item, Status } from "../__generated__/types";
 import { useUpdateItemMutation } from "../__generated__/graphql/updateItem.types";
 import UpdateItemDialog from "./UpdateItemDialog";
